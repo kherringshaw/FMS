@@ -7,6 +7,7 @@ public class Use {
     private int usageId;
     private String startDate;
     private String endDate;
+    private int facilityId;
 
 
     public int getUsageId() {
@@ -31,6 +32,14 @@ public class Use {
 
     public void setEndDate(String date) {
         this.endDate = date;
+    }
+    
+    public int getFacilityID() {
+        return facilityID;
+    }
+    
+    public void setFacilityID(int facID) { //possibly take a facility as an input instead
+        this.facilityID = facID;
     }
 
 }
