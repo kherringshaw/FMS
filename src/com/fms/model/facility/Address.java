@@ -3,7 +3,6 @@ package com.fms.model.facility;
 public class Address {
 	private int addressId;
 	private String street;
-	private String unit;
 	private String city;
 	private String state;
 	private String zip;
@@ -24,12 +23,7 @@ public class Address {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public String getUnit() {
-		return unit;
-	}
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
+
 	public String getCity() {
 		return city;
 	}
