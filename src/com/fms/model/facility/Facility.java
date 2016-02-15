@@ -16,7 +16,6 @@ public class Facility{
 	private double rate;//delete
 	private String description;
 	private Address address;
-	private Unit unit;
 	private List<MaintenanceRequest> requests;
 	private List<Facility> facList;
 	
@@ -73,13 +72,6 @@ public class Facility{
 		this.requests = requests;
 	}
 
-	public Unit getunit() {
-		return unit;
-	}
-
-	public void setunit(Unit unit) {
-		this.unit = unit;
-	}
 
 	public String getDescription() {
 		return description;
