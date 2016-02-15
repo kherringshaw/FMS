@@ -17,7 +17,7 @@ public class Facility{
 	private String description;
 	private Address address;
 	private Unit unit;
-	private List<MaintenanceRequest> requests = new ArrayList<MaintenanceRequest>();
+	private List<MaintenanceRequest> requests;
 	private List<Facility> facList;
 	
 	//delete later -- this is for testing
