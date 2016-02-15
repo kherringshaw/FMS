@@ -99,5 +99,13 @@ public class Facility{
 		this.last_name = last_name;
 	}
 	
+	public List<Facility> getFacList() {
+		return facList;
+	}
+
+	public void setFacList(List<Facility> facList) {
+		this.facList = facList;
+	}
+	
 
 }
