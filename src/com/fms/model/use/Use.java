@@ -34,8 +34,8 @@ public class Use {
         this.endDate = date;
     }
     
-    public int getFacilityID() {
-        return facilityID;
+    public Facility getFacility() {
+        return facility;
     }
     
     public void setFacility(Facility f) { 
