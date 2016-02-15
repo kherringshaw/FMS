@@ -14,7 +14,7 @@ import com.fms.model.facility.Unit;
 		
 		public FacilityDAO() {}
 		
-		public Facility getFacility(String facilityID) {
+		public Facility getFacility(int facilityID) {
 			 	 
 		    try { 		
 		    	//Get Facility
