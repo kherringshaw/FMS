@@ -7,7 +7,7 @@ public class Use {
     private int usageId;
     private String startDate;
     private String endDate;
-    private Facility fac;
+    private Facility facility;
 
 
     public int getUsageId() {
@@ -38,8 +38,8 @@ public class Use {
         return facilityID;
     }
     
-    public void setFac(Facility f) { 
-        this.fac = f;
+    public void setFacility(Facility f) { 
+        this.facility = f;
     }
 
 }
