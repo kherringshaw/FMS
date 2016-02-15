@@ -9,7 +9,7 @@ public class FacilityActivities {
 	private FacilityDAO facDAO = new FacilityDAO();
 	
 	//search customer by ID from the DB
-	public Facility findFacilityById(String facilityID) {
+	public Facility findFacilityById(int facilityID) {
 				
 		try {
 			Facility facility = facDAO.getFacility(facilityID);
