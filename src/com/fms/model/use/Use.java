@@ -5,8 +5,8 @@ package com.fms.model.use;
 public class Use {
 
     private int usageId;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private Facility facility;
 
 
@@ -18,19 +18,19 @@ public class Use {
         this.usageId = id;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String date) {
+    public void setStartDate(Date date) {
         this.startDate = date;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String date) {
+    public void setEndDate(Date date) {
         this.endDate = date;
     }
     
