@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fms.model.facility.Address;
 import com.fms.model.facility.Facility;
 import com.fms.model.facility.Unit;
@@ -44,7 +47,6 @@ import com.fms.model.facility.Unit;
 		      while ( addRS.next() ) {
 		    	  address.setAddressId(addRS.getString("addressid"));
 		    	  address.setStreet(addRS.getString("street"));
-		    	  address.setUnit(addRS.getString("unit"));
 		    	  address.setCity(addRS.getString("city"));
 		    	  address.setState(addRS.getString("state"));
 		    	  address.setZip(addRS.getString("zip"));
@@ -74,31 +76,26 @@ import com.fms.model.facility.Unit;
 
 	        try {
 	        	//Insert the facility object
-	            String facStm = "INSERT INTO facility(facilityID, description, size, rate, last_name) VALUES(?, ?, ?, ?, ?)";
+	            String facStm = "INSERT INTO facility(facilityID, description) VALUES(?, ?)";
 	            facPst = con.prepareStatement(facStm);
 	            facPst.setInt(1, fac.getFacilityID());
 	            facPst.setString(2, fac.getDescription());
-	            facPst.setInt(3, fac.getSize());       
-	            facPst.setDouble(4, fac.getRate()); 
-	            facPst.setString(5, fac.getLast_name());
 	            facPst.executeUpdate();
 
 	        	//Insert the facility address object
-	            String addStm = "INSERT INTO Address(addressID, facilityID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	            String addStm = "INSERT INTO Address(addressID, facilityID, street, city, state, zip) VALUES(?, ?, ?, ?, ?, ?)";
 	            addPst = con.prepareStatement(addStm);
 	            addPst.setString(1, fac.getAddress().getAddressId());
-	            System.out.println("test");
 	            addPst.setInt(2, fac.getFacilityID());
 	            addPst.setString(3, fac.getAddress().getStreet());       
-	            addPst.setString(4, fac.getAddress().getUnit());  
-	            addPst.setString(5, fac.getAddress().getCity());  
-	            addPst.setString(6, fac.getAddress().getState());      
-	            addPst.setString(7, fac.getAddress().getZip());  
+	            addPst.setString(4, fac.getAddress().getCity());  
+	            addPst.setString(5, fac.getAddress().getState());      
+	            addPst.setString(6, fac.getAddress().getZip());  
 	            addPst.executeUpdate();
 	            
 	            /**
-	        	//Insert the facility address object
-	            String unitStm = "INSERT INTO unit(FacilityID, unitID, unit) VALUES(?, ?, ?)";
+	        	//Insert the unit object
+	            String unitStm = "INSERT INTO unit(addressID, unitID, unit) VALUES(?, ?, ?)";
 	            unitPst = con.prepareStatement(unitStm);
 	            unitPst.setInt(1, fac.getFacilityID());
 	            unitPst.setString(2, fac.getunit().getunitID());  
@@ -131,10 +128,13 @@ import com.fms.model.facility.Unit;
 	        try {
 	            Connection connection = DBHelper.getConnection();
 	            int removeID = test;
-	            String selectRemove = "DELETE FROM Facility WHERE facilityID = '" + removeID + "'";
-	            PreparedStatement statement = connection.prepareStatement(selectRemove);
+	            String selectRemove_fac = "DELETE FROM Facility WHERE facilityID = '" + removeID + "'";
+	            String selectRemove_address = "DELETE FROM address WHERE facilityID = '" + removeID + "'";
+	            PreparedStatement statement_fac = connection.prepareStatement(selectRemove_fac);
+	            PreparedStatement statement_address = connection.prepareStatement(selectRemove_address);
 	            
-	            statement.executeUpdate();
+	            statement_fac.executeUpdate();
+	            statement_address.executeUpdate();
 
 	            connection.close();
 
@@ -146,7 +146,30 @@ import com.fms.model.facility.Unit;
 			
 		}
 		
-		public static void queryFacilities(int test) {
+		public List<Facility> queryFacilities(){
+			try {
+				Connection connection = DBHelper.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery("SELECT * FROM facility");
+				
+				List<Facility> list = new ArrayList<Facility>();
+				System.out.println("facility DAO");
+				while (rs.next()){
+					//list.add(rs.getString(1));
+					//System.out.println("test query");
+					list.add(rs.findColumn("description"), null);
+				}
+				return list;
+			}
+				catch(SQLException e) {
+					System.err.println("Got an exception for query! ");
+					System.err.println(e.getMessage());
+				}
+				return null;
+			
+		}
+		
+/*		public static void queryFacilities(int test) {
 			try {
 			Connection connection = DBHelper.getConnection();
 			Statement statement = connection.createStatement();
@@ -163,6 +186,6 @@ import com.fms.model.facility.Unit;
 			catch(SQLException e) {
 				System.err.println("Got an exception for query! ");
 			}
-			}
+			}*/
 		
 	}

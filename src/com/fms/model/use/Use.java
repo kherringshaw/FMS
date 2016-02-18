@@ -1,5 +1,9 @@
 package com.fms.model.use;
 
+import java.util.Date;
+
+import com.fms.model.facility.Facility;
+
 
 
 public class Use {
@@ -8,6 +12,7 @@ public class Use {
     private Date startDate;
     private Date endDate;
     private Facility facility;
+	private String useDescription;
 
 
     public int getUsageId() {
@@ -42,4 +47,15 @@ public class Use {
         this.facility = f;
     }
 
+    public String getUseDescription() {
+    	return useDescription;
+    }
+    
+    public void setUseDescription(String useDescription) {
+    	this.useDescription = useDescription;
+    }
+    
+    public String toString() {
+    	return ("Use Information - " + "ID: " + usageId + ", Facility: " + getFacility() + ", Description: " + getUseDescription() + ", Start Date: "+ getStartDate());
+    	}
 }

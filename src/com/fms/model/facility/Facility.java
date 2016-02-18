@@ -11,9 +11,8 @@ import com.fms.model.maintenance.MaintenanceRequest;
 
 public class Facility{
 	private int facilityID;
-	private int floor;//deleyte
-	private int size;//delete
 	private double rate;//delete
+	private int size;
 	private String description;
 	private Address address;
 	private List<MaintenanceRequest> requests;
@@ -29,22 +28,6 @@ public class Facility{
 
 	public void setFacilityID(int id) {
 		this.facilityID = id;
-	}
-	
-	public int getFloor() {
-		return floor;
-	}
-
-	public void setFloor(int floor) {
-		this.floor = floor;
-	}
-	
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
 	}
 	
 	public double getRate() {
@@ -98,6 +81,21 @@ public class Facility{
 	public void setFacList(List<Facility> facList) {
 		this.facList = facList;
 	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	@Override
+	public String toString() {
+	return ("Facility Information - " + "ID: " + facilityID + ", Size: " + size + ", Vacant: " + last_name + ", Description: "+ description );
+	}
+
+
 	
 
 }

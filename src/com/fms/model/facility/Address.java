@@ -1,7 +1,7 @@
 package com.fms.model.facility;
 
-public class Address {
-	private int addressId;
+public class Address extends Facility{
+	private String addressId;
 	private String street;
 	private String city;
 	private String state;
@@ -9,11 +9,11 @@ public class Address {
 	
 	public Address() {}
 	
-	public int getAddressId() {
+	public String getAddressId() {
 		return addressId;
 	}
 	
-	public void setAddressId(int id) {
+	public void setAddressId(String string) {
 		this.addressId = string;
 	}
 	

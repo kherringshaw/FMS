@@ -2,6 +2,8 @@ package com.fms.model.activity;
 
 
 	
+import java.util.List;
+
 import com.fms.dal.FacilityDAO;
 import com.fms.model.facility.Facility;
 
@@ -47,16 +49,21 @@ public class FacilityActivities {
 		    }
 		}
 		
-		//Delete facility in the DB
-		public void queryFacilities(int test) {
+		
+		
+		//Query facility in the DB
+		public List<Facility> queryFacilities() {
 				
 			try {
-				facDAO.queryFacilities(test);
-				//System.out.println("Here is a list of Facilities");
+				System.out.println("Here is a list of Facilities");
+				return facDAO.queryFacilities();
+
+				
 		    } catch (Exception se) {
 			      System.err.println("Activity: Threw an Exception in query facility.");
 			      System.err.println(se.getMessage());
 		    }
+			return null;
 		}
 		
 	}
