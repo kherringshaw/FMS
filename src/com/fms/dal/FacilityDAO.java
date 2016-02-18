@@ -189,7 +189,6 @@ import com.fms.model.facility.Unit;
 			try {
 				Connection connection = DBHelper.getConnection();
 				Statement statement = connection.createStatement();
-				System.out.println("working");//line above is failing
 				ResultSet rs = statement.executeQuery("SELECT * FROM facility WHERE facilityID = '" + facilityID + "'");
 				
 				List list2 = new ArrayList();
@@ -209,6 +208,30 @@ import com.fms.model.facility.Unit;
 			}
 			return null;
 			}
+		
+
+public boolean assignFacilityToUse(String addressId, boolean isVacant){
+	
+	try {
+		System.out.println("*************** Searching for unit information with ID ...  " + addressId);
+		Connection connection = DBHelper.getConnection();
+		Statement statement = connection.createStatement();
+		
+		ResultSet rs = statement.executeQuery("update Unit set isVacant=:isVacant where addressId=:addressId");		
+		rs.updateString("addressId", addressId);
+		rs.updateBoolean("isVacant", isVacant);
+		
+		
+		//rs.executeUpdate();
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+	 return isVacant;
+}
+
 		
 		
 	/*	public static void queryFacilities(int test) {

@@ -10,6 +10,7 @@ import com.fms.model.*;
 
 import java.awt.List;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 
 
@@ -79,6 +80,13 @@ public class FacilityUI {
 
         
         System.out.println(address1.getAddressId()); */
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        Date startDate;
+       // startDate=09-09-2016;
+        //dateFormat.parse(startDate);
+
+        
+        //address1.setStartDate(09012016);
 
 
         

@@ -92,7 +92,7 @@ public class Facility{
 	
 	@Override
 	public String toString() {
-	return ("Facility Information - " + "ID: " + facilityID + ", Size: " + size + ", Vacant: " + last_name + ", Description: "+ description );
+	return ("Facility Information - " + "ID: " + facilityID + ", Size: " + size + ", Description: "+ description );
 	}
 
 

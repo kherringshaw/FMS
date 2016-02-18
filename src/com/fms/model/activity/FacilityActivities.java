@@ -25,14 +25,16 @@ public class FacilityActivities {
 		
 		//Insert a new facility in the DB
 	public void addFacility(Facility facility) {
+
 			
 		try {
-
+			System.out.println(facility);
 			facDAO.addFacility(facility);
 			System.out.println("facility has been added - KH");
 	    } catch (Exception se) {
 		      System.err.println("Facility: Threw an Exception adding facility.");
 		      System.err.println(se.getMessage());
+		      System.err.println("this is the error");
 	    }
 	}
 	
