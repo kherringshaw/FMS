@@ -8,16 +8,19 @@ import com.fms.model.facility.Facility;
 import com.fms.model.facility.Address;
 import com.fms.model.*;
 
+import java.awt.List;
 import java.sql.*;
+
+
 
 public class FacilityUI {
 	
 	public static void main (String[] args){
 		
-		DBHelper.DBHelper();
-		DBHelper.getConnection();
-		DBHelper.executeSQL();
-		DBHelper.testPrintSQL();
+		//DBHelper.DBHelper();
+		//DBHelper.getConnection();
+		//DBHelper.executeSQL();
+		//DBHelper.testPrintSQL();
 		
 		System.out.println("Facility: *************** add a facility *************************");
 		
@@ -30,12 +33,13 @@ public class FacilityUI {
 		
 		
 		
-        facility1.setFacilityID(1);
-        facility1.setDescription("IBM Building");     
+        facility1.setFacilityID(2);
+        facility1.setSize(300000);
+        facility1.setDescription("77 West Wacker Building");
         
         //address1 for facility 1
         Address address1 = new Address();
-        address1.setFacilityID(1);
+        address1.setFacilityID(2);
         address1.setAddressId("A01");
         address1.setStreet("500 West Madison St.");
         address1.setCity("Chicago");
@@ -44,29 +48,43 @@ public class FacilityUI {
         facility1.setAddress(address1); 
         
         //address2 for facility 1
-        Address address2 = new Address();
-        address1.setFacilityID(1);
+        /*Address address2 = new Address();
+        address1.setFacilityID(2);
         address1.setAddressId("B01");
         address1.setStreet("550 West Madison St.");
         address1.setCity("Chicago");
         address1.setState("IL");
         address1.setZip("66610");
-        facility1.setAddress(address2); 
+        facility1.setAddress(address2); */
         
         
         fac1.addFacility(facility1);
         
         
         
-        facility2.setFacilityID(2);
-        facility2.setLast_name("Herringshaw");
-        facility2.setDescription("AMLI Rental Apartments");
-        fac1.addFacility(facility2);
+//        facility2.setFacilityID(3);
+//        facility2.setLast_name("Herringshaw");
+//        facility2.setDescription("AMLI Rental Apartments");
+//        fac1.addFacility(facility2);
         
-        fac1.deleteFacility(2);
+//        fac1.deleteFacility(2);
         
-        fac1.queryFacilities();
-        System.out.println("after main");
+//        java.util.List<Facility> test = fac1.queryFacilities();
+        
+//        for (int i = 0; i < test.size(); i++){
+ /*       	System.out.println(test.get(i));
+        }
+        fac1.getFacilityInformation(2);
+        
+
+        
+        System.out.println(address1.getAddressId()); */
+
+
+        
+        
+        
+
         
      
         

@@ -11,7 +11,7 @@ public class FacilityActivities {
 	private FacilityDAO facDAO = new FacilityDAO();
 	
 	//search customer by ID from the DB
-	public Facility findFacilityById(int facilityID) {
+/*	public Facility findFacilityById(int facilityID) {
 				
 		try {
 			Facility facility = facDAO.getFacility(facilityID);
@@ -21,7 +21,7 @@ public class FacilityActivities {
 	      System.err.println(se.getMessage());
 	    }
 		return null;
-	}
+	}*/
 		
 		//Insert a new facility in the DB
 	public void addFacility(Facility facility) {
@@ -55,7 +55,7 @@ public class FacilityActivities {
 		public List<Facility> queryFacilities() {
 				
 			try {
-				System.out.println("Here is a list of Facilities");
+
 				return facDAO.queryFacilities();
 
 				
@@ -65,6 +65,22 @@ public class FacilityActivities {
 		    }
 			return null;
 		}
+
+
+
+		
+
+	    public List getFacilityInformation(int facilityId){
+
+	        try {
+	            List fac = FacilityDAO.getFacilityInformation(facilityId);
+	            return fac;
+	        } catch (Exception se) {
+	            System.err.println("FacilityService: Threw a Exception retrieving facility.");
+	            System.err.println(se.getMessage());
+	        }
+	        return null;
+	    }
 		
 	}
 

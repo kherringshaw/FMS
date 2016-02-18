@@ -1,19 +1,22 @@
 package com.fms.dal;
 
 
-	import java.sql.Connection;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 import com.fms.model.facility.Address;
 import com.fms.model.facility.Facility;
 import com.fms.model.facility.Unit;
 
 	public class FacilityDAO {
+		
 		
 		public FacilityDAO() {}
 		
@@ -22,7 +25,7 @@ import com.fms.model.facility.Unit;
 		    try { 		
 		    	//Get Facility
 		    	Statement st = DBHelper.getConnection().createStatement();
-		    	String selectFacilityQuery = "SELECT facilityID, size, rate FROM Customer WHERE facilityID = '" + facilityID + "'";
+		    	String selectFacilityQuery = "SELECT facilityID, size, rate FROM facility WHERE facilityID = '" + facilityID + "'";
 
 		    	ResultSet facRS = st.executeQuery(selectFacilityQuery);      
 		    	System.out.println("faciityDAO: *************** Query " + selectFacilityQuery);
@@ -76,11 +79,22 @@ import com.fms.model.facility.Unit;
 
 	        try {
 	        	//Insert the facility object
-	            String facStm = "INSERT INTO facility(facilityID, description) VALUES(?, ?)";
+	            String facStm = "INSERT INTO facility(facilityID, description, size) VALUES(?, ?, ?)";
 	            facPst = con.prepareStatement(facStm);
 	            facPst.setInt(1, fac.getFacilityID());
 	            facPst.setString(2, fac.getDescription());
+	            facPst.setInt(3, fac.getSize());
 	            facPst.executeUpdate();
+	            
+/*	            String addStm = "INSERT INTO Address(addressID, facilityID, street) VALUES(?, ?, ?)";
+	            addPst = con.prepareStatement(addStm);
+	            addPst.setString(1, fac.getAddress().getAddressId());
+	            addPst.setInt(2, fac.getFacilityID());
+	            addPst.setString(3, fac.getAddress().getStreet()); 
+	            addPst.executeUpdate();
+	            */
+	            
+	            
 
 	        	//Insert the facility address object
 	            String addStm = "INSERT INTO Address(addressID, facilityID, street, city, state, zip) VALUES(?, ?, ?, ?, ?, ?)";
@@ -93,7 +107,7 @@ import com.fms.model.facility.Unit;
 	            addPst.setString(6, fac.getAddress().getZip());  
 	            addPst.executeUpdate();
 	            
-	            /**
+	            /*
 	        	//Insert the unit object
 	            String unitStm = "INSERT INTO unit(addressID, unitID, unit) VALUES(?, ?, ?)";
 	            unitPst = con.prepareStatement(unitStm);
@@ -117,7 +131,7 @@ import com.fms.model.facility.Unit;
 	                }
 
 	            } catch (SQLException ex) {
-	      	      System.err.println("FacilityDAO: Threw a SQLException saving the customer object.");
+	      	      System.err.println("FacilityDAO: Threw a SQLException saving the facility object.");
 	    	      System.err.println(ex.getMessage());
 	            }
 	        }
@@ -152,13 +166,15 @@ import com.fms.model.facility.Unit;
 				Statement statement = connection.createStatement();
 				ResultSet rs = statement.executeQuery("SELECT * FROM facility");
 				
-				List<Facility> list = new ArrayList<Facility>();
-				System.out.println("facility DAO");
+				List list = new ArrayList();
+				//System.out.println("facility DAO");
 				while (rs.next()){
-					//list.add(rs.getString(1));
+					list.add(rs.getString(2));
 					//System.out.println("test query");
-					list.add(rs.findColumn("description"), null);
+					//list.add(rs.findColumn("description"), null);
 				}
+				System.out.println("Here is a list of Facilities");
+				System.out.println("____________________________");
 				return list;
 			}
 				catch(SQLException e) {
@@ -169,23 +185,53 @@ import com.fms.model.facility.Unit;
 			
 		}
 		
-/*		public static void queryFacilities(int test) {
+		public static List getFacilityInformation(int facilityID) {
 			try {
-			Connection connection = DBHelper.getConnection();
-			Statement statement = connection.createStatement();
-			System.out.println("working");//line above is failing
-			ResultSet rs = statement.executeQuery("SELECT * FROM facility WHERE facilityID = '" + test + "'");
+				Connection connection = DBHelper.getConnection();
+				Statement statement = connection.createStatement();
+				System.out.println("working");//line above is failing
+				ResultSet rs = statement.executeQuery("SELECT * FROM facility WHERE facilityID = '" + facilityID + "'");
+				
+				List list2 = new ArrayList();
 
 			while (rs.next()) {
-			System.out.println(rs.getInt(1)+ "\t\t" + rs.getString(2) + "\t\t" + rs.getString(3));
+				System.out.println(rs.getInt(1)+ "\t\t" + rs.getString(2) + "\t\t" + rs.getString(3));				
+				list2.add(rs.getInt(1)+ "\t\t" + rs.getString(2) + "\t\t" + rs.getString(3));
+				}
+			
+				rs.close();
+				statement.close();
+				connection.close();
+				return list2;
+				}
+				catch(SQLException e) {
+					System.err.println("Got an exception for query! ");
 			}
-			rs.close();
-			statement.close();
-			connection.close();
+			return null;
 			}
-			catch(SQLException e) {
-				System.err.println("Got an exception for query! ");
+		
+		
+	/*	public static void queryFacilities(int test) {
+			try {
+				Connection connection = DBHelper.getConnection();
+				Statement statement = connection.createStatement();
+				System.out.println("working");//line above is failing
+				ResultSet rs = statement.executeQuery("SELECT * FROM facility WHERE facilityID = '" + test + "'");
+
+			while (rs.next()) {
+				System.out.println(rs.getInt(1)+ "\t\t" + rs.getString(2) + "\t\t" + rs.getString(3));
+				}
+				rs.close();
+				statement.close();
+				connection.close();
+				}
+				catch(SQLException e) {
+					System.err.println("Got an exception for query! ");
 			}
 			}*/
+		
+		//public static Address isInUseDuringInterval(){
+			
+		//}
 		
 	}
