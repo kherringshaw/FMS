@@ -1,6 +1,6 @@
 "# FMS" 
 
-facility methods: <br>
+<b>facility methods:</b> <br>
 public object listFacilities() DONE <br>
 public object getFacilityInformation() DONE <br>
 public object requestAvailableCapcity() TODO <br>
@@ -9,7 +9,7 @@ public void addFacilityDetail() DONE <br>
 public object removeFacility() DONE <br>
 <p>
 
-facility use methods: <br>
+<b>facility use methods:</b> <br>
 public object isInUseDuringInterval() TODO <br>
 public object assignFacilityToUse() DONE assignFacilityToUse and vacateFacility are going to be the same method it returns a bool <br>
 public object vacateFacility() DONE <br>
@@ -18,7 +18,7 @@ public object listActualUsage() TODO <br>
 public object calcUsageRate()TODO <br>
 <p>
 
-facility maintenance methods: <br>
+<b>facility maintenance methods:</b> <br>
 public object makeFacilityMaintRequest() <br>
 public object scheduleMaintenance() <br>
 public object calcProblemRateForFacility() <br>
