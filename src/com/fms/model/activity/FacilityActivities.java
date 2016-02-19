@@ -5,6 +5,7 @@ package com.fms.model.activity;
 import java.util.List;
 
 import com.fms.dal.FacilityDAO;
+import com.fms.model.facility.Address;
 import com.fms.model.facility.Facility;
 
 public class FacilityActivities {
@@ -95,6 +96,36 @@ public class FacilityActivities {
 	            System.err.println(se.getMessage());
 	        }
 	        return (Boolean) null;
+	    }
+	    
+	    public Object listActualUsage() {
+			
+		try {
+
+			return facDAO.listActualUsage();
+
+			
+	    } catch (Exception se) {
+		      System.err.println("Activity: Threw an Exception in listActualUsage.");
+		      System.err.println(se.getMessage());
+	    }
+		return null;
+	    	
+	    }
+	    
+	    public double calcUsageRate(String addressId) {
+			
+		try {
+
+			return facDAO.calculateUsageRate(addressId);
+
+			
+	    } catch (Exception se) {
+		      System.err.println("Activity: Threw an Exception in calculateUsageRate.");
+		      System.err.println(se.getMessage());
+	    }
+		return (Double) null;
+	    	
 	    }
 	    
 	    

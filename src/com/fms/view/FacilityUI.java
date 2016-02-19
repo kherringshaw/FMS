@@ -72,6 +72,9 @@ public class FacilityUI {
        // address1.setVacant(false);
         fac1.assignFacilityToUse("A01", false);
         
+        fac1.listActualUsage();
+        fac1.calcUsageRate("A01");
+        
 /*        
         
         

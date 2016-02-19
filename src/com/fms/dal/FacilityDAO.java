@@ -228,7 +228,7 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 	 return isVacant;
 }
 //this method isn't needed because assignFacilityToUse takes a bool
-public boolean vacateFacility(String addressId, boolean isVacant){
+/*public boolean vacateFacility(String addressId, boolean isVacant){
 	
 	try {
 		System.out.println("*************** Searching for address information with ID ...  " + addressId);
@@ -248,7 +248,7 @@ public boolean vacateFacility(String addressId, boolean isVacant){
 		}
 	
 	 return isVacant;
-}
+}*/
 
 		
 		
@@ -271,8 +271,70 @@ public boolean vacateFacility(String addressId, boolean isVacant){
 			}
 			}*/
 		
-		//public static Address isInUseDuringInterval(){
+		public static Address isInUseDuringInterval(){
+			return null;
 			
-		//}
+		}
+
+		public Object listActualUsage() {
+			try {
+				Connection connection = DBHelper.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery("SELECT * FROM address WHERE isVacant = 'false'");	
+				
+				List list = new ArrayList();
+				while (rs.next()){
+					list.add(rs.getString(2));
+				}
+				System.out.println("Here is a list of ActualUsage");
+				System.out.println(list);
+				System.out.println("____________________________");
+				return list;
+			}
+				catch(SQLException e) {
+					System.err.println("Got an exception for query! ");
+					System.err.println(e.getMessage());
+				}
+				return null;
+			
+		}
+		
+		@SuppressWarnings("unchecked")
+		public double calculateUsageRate(String addressId) {
+			int y = 0;
+			try {
+				Connection connection = DBHelper.getConnection();
+				Statement statement = connection.createStatement();
+				double usageRate = 0;
+				//ResultSet rs1 = statement.executeQuery("SELECT * FROM address WHERE isVacant = 'false'");	
+				ResultSet rs = statement.executeQuery("SELECT * FROM address WHERE addressId = '" + addressId + "'");
+				
+				List list1 = new ArrayList();
+
+				while (rs.next()){
+					list1.add(rs.getString(9));
+				}
+
+				//System.out.println("what type is list1 " + list1.get(0).getClass().getName());
+				
+				for(int i = 0; i<list1.size(); i++)
+					if(list1.get(i).equals("0")){	
+						y++;						
+					}
+
+				
+				usageRate = (y/list1.size())*100;
+				System.out.println("The number of facilities in use: " + list1.size());
+				System.out.println("The usage rate: " + usageRate);
+				//System.out.println(list);
+				return usageRate;
+			}
+				catch(SQLException e) {
+					System.err.println("Got an exception for calculateUsageRate! ");
+					System.err.println(e.getMessage());
+				}
+				return (Double) null;
+			
+		}
 		
 	}
