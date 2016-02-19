@@ -213,11 +213,33 @@ import com.fms.model.facility.Unit;
 public boolean assignFacilityToUse(String addressId, boolean isVacant){
 	
 	try {
-		System.out.println("*************** Searching for unit information with ID ...  " + addressId);
+		System.out.println("*************** Searching for address information with ID ...  " + addressId);
 		Connection connection = DBHelper.getConnection();
 		Statement statement = connection.createStatement();
 		
-		ResultSet rs = statement.executeQuery("update Unit set isVacant=:isVacant where addressId=:addressId");		
+		ResultSet rs = statement.executeQuery("update Address set isVacant=:isVacant where addressId=:addressId");		
+		rs.updateString("addressId", addressId);
+		rs.updateBoolean("isVacant", isVacant);
+		
+		
+		//rs.executeUpdate();
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+	 return isVacant;
+}
+
+public boolean vacateFacility(String addressId, boolean isVacant){
+	
+	try {
+		System.out.println("*************** Searching for address information with ID ...  " + addressId);
+		Connection connection = DBHelper.getConnection();
+		Statement statement = connection.createStatement();
+		
+		ResultSet rs = statement.executeQuery("update Address set isVacant=:isVacant where addressId=:addressId");		
 		rs.updateString("addressId", addressId);
 		rs.updateBoolean("isVacant", isVacant);
 		

@@ -1,6 +1,10 @@
 package com.fms.model.facility;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import com.fms.model.use.Use;
 
 public class Address extends Facility{
 	private String addressId;
@@ -8,9 +12,14 @@ public class Address extends Facility{
 	private String city;
 	private String state;
 	private String zip;
+	private int capacity;
+	private List<Use> usages;
+	
 
 	
-	public Address() {}
+	public Address() {
+        usages = new ArrayList<Use>();
+	}
 	
 	public String getAddressId() {
 		return addressId;
@@ -46,6 +55,25 @@ public class Address extends Facility{
 		this.zip = zip;
 	}
 
+	public int getCapacity() {
+		return capacity;
+	}
 
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+	
+    public List<Use> getUsages(){
+        return usages;
+    }
+
+    public void setUsages(List<Use> usages){
+        this.usages = usages;
+    }
+
+	@Override
+	public String toString() {
+	return ("Address Information - " + "ID: " + addressId + ", Capacity: " + capacity + ", Description: "+ street );
+	}
 
 }

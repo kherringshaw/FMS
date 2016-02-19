@@ -1,8 +1,10 @@
 package com.fms.model.use;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
-import com.fms.model.facility.Facility;
+import java.sql.Date;
+
+import com.fms.model.facility.Address;
 
 
 
@@ -11,8 +13,8 @@ public class Use {
     private int usageId;
     private Date startDate;
     private Date endDate;
-    private Facility facility;
-	private String useDescription;
+    private Address address;
+
 
 
     public int getUsageId() {
@@ -39,23 +41,17 @@ public class Use {
         this.endDate = date;
     }
     
-    public Facility getFacility() {
-        return facility;
+    public Address getAddress() {
+        return address;
     }
     
-    public void setFacility(Facility f) { 
-        this.facility = f;
+    public void setAddress(Address f) { 
+        this.address = f;
     }
 
-    public String getUseDescription() {
-    	return useDescription;
-    }
-    
-    public void setUseDescription(String useDescription) {
-    	this.useDescription = useDescription;
-    }
+
     
     public String toString() {
-    	return ("Use Information - " + "ID: " + usageId + ", Facility: " + getFacility() + ", Description: " + getUseDescription() + ", Start Date: "+ getStartDate());
+    	return ("Use Information - " + "ID: " + ", Address: " + getAddress() +  ", Start Date: "+ getStartDate() +  ", End Date: "+ getEndDate());
     	}
 }
