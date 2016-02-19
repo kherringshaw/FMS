@@ -1,12 +1,13 @@
 "# FMS" 
 
-facility methods:
-public object listFacilities() DONE
-public object getFacilityInformation() DONE
-public object requestAvailableCapcity() TODO
-public object addNewFacility() DONE
-public void addFacilityDetail() DONE
-public object removeFacility() DONE
+facility methods: <br>
+public object listFacilities() DONE <br>
+public object getFacilityInformation() DONE <br>
+public object requestAvailableCapcity() TODO <br>
+public object addNewFacility() DONE <br>
+public void addFacilityDetail() DONE <br>
+public object removeFacility() DONE <br>
+<p>
 
 facility use methods:
 public object isInUseDuringInterval() TODO
