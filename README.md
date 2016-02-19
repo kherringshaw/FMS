@@ -3,7 +3,7 @@
 <b>facility methods:</b> <br>
 public object listFacilities() DONE <br>
 public object getFacilityInformation() DONE <br>
-public object requestAvailableCapcity() TODO <br>
+public object requestAvailableCapcity() DONE <br>
 public object addNewFacility() DONE <br>
 public void addFacilityDetail() DONE <br>
 public object removeFacility() DONE <br>
@@ -15,7 +15,7 @@ public object assignFacilityToUse() DONE assignFacilityToUse and vacateFacility 
 public object vacateFacility() DONE <br>
 public object listInspections() TODO <br>
 public object listActualUsage() DONE <br>
-public object calcUsageRate()TODO <br>
+public object calcUsageRate()DONE <br>
 <p>
 
 <b>facility maintenance methods:</b> <br>
