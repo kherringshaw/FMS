@@ -14,7 +14,7 @@ public object isInUseDuringInterval() TODO <br>
 public object assignFacilityToUse() DONE assignFacilityToUse and vacateFacility are going to be the same method it returns a bool <br>
 public object vacateFacility() DONE <br>
 public object listInspections() TODO <br>
-public object listActualUsage() TODO <br>
+public object listActualUsage() DONE <br>
 public object calcUsageRate()TODO <br>
 <p>
 
