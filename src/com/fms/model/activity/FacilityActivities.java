@@ -113,11 +113,11 @@ public class FacilityActivities {
 	    	
 	    }
 	    
-	    public double calcUsageRate(String addressId) {
+	    public double calcUsageRate(int facilityId) {
 			
 		try {
 
-			return facDAO.calculateUsageRate(addressId);
+			return facDAO.calculateUsageRate(facilityId);
 
 			
 	    } catch (Exception se) {
@@ -126,6 +126,18 @@ public class FacilityActivities {
 	    }
 		return (Double) null;
 	    	
+	    }
+	    
+	    public int requestAvailableCapacity(int facilityId) {
+			
+		try {
+			return facDAO.requestAvailableCapacity(facilityId);
+			
+	    } catch (Exception se) {
+		      System.err.println("Activity: Threw an Exception in calculateUsageRate.");
+		      System.err.println(se.getMessage());
+	    }
+		return (Integer) null;	    	
 	    }
 	    
 	    

@@ -97,7 +97,7 @@ import com.fms.model.facility.Unit;
 	            
 
 	        	//Insert the facility address object
-	            String addStm = "INSERT INTO Address(addressID, facilityID, street, city, state, zip) VALUES(?, ?, ?, ?, ?, ?)";
+	            String addStm = "INSERT INTO Address(addressID, facilityID, street, city, state, zip, capacity) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	            addPst = con.prepareStatement(addStm);
 	            addPst.setString(1, fac.getAddress().getAddressId());
 	            addPst.setInt(2, fac.getFacilityID());
@@ -105,6 +105,7 @@ import com.fms.model.facility.Unit;
 	            addPst.setString(4, fac.getAddress().getCity());  
 	            addPst.setString(5, fac.getAddress().getState());      
 	            addPst.setString(6, fac.getAddress().getZip());  
+	            addPst.setInt(7, fac.getAddress().getCapacity());
 	            addPst.executeUpdate();
 	            
 	            /*
@@ -300,14 +301,14 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 		}
 		
 		@SuppressWarnings("unchecked")
-		public double calculateUsageRate(String addressId) {
-			int y = 0;
+		public double calculateUsageRate(int facilityId) {
+			double y = 0;
 			try {
 				Connection connection = DBHelper.getConnection();
 				Statement statement = connection.createStatement();
 				double usageRate = 0;
 				//ResultSet rs1 = statement.executeQuery("SELECT * FROM address WHERE isVacant = 'false'");	
-				ResultSet rs = statement.executeQuery("SELECT * FROM address WHERE addressId = '" + addressId + "'");
+				ResultSet rs = statement.executeQuery("SELECT * FROM address WHERE facilityId = '" + facilityId + "'");
 				
 				List list1 = new ArrayList();
 
@@ -319,13 +320,13 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 				
 				for(int i = 0; i<list1.size(); i++)
 					if(list1.get(i).equals("0")){	
+						System.out.println("what is the value in list1.get(i): " + list1.get(i));
 						y++;						
 					}
-
 				
-				usageRate = (y/list1.size())*100;
-				System.out.println("The number of facilities in use: " + list1.size());
-				System.out.println("The usage rate: " + usageRate);
+				usageRate = (y/list1.size())*100.0;
+				System.out.println("The number of units in use: " + y);
+				System.out.println( "The usage rate for facilityID "+ facilityId + ": " + usageRate );
 				//System.out.println(list);
 				return usageRate;
 			}
@@ -334,6 +335,38 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 					System.err.println(e.getMessage());
 				}
 				return (Double) null;
+			
+		}
+		
+		@SuppressWarnings("unchecked")
+		public int requestAvailableCapacity(int facilityId) {
+			int y=0;
+
+			try {
+				Connection connection = DBHelper.getConnection();
+				Statement statement = connection.createStatement();
+
+				ResultSet rs = statement.executeQuery("SELECT * FROM address WHERE facilityId = '" + facilityId + "'");
+				
+				List<Integer> list1 = new ArrayList();
+
+				while (rs.next()){
+					list1.add(rs.getInt(10));
+				}
+
+			     Integer sum = new Integer(0); 
+			     for (Integer i : list1) {
+			         sum = sum + i;
+			     }
+			     System.out.println("The total capacity for facility " + facilityId + " is: "  + sum);
+
+				return sum;
+			}
+				catch(SQLException e) {
+					System.err.println("Got an exception for calculateUsageRate! ");
+					System.err.println(e.getMessage());
+				}
+				return (Integer) null;
 			
 		}
 		

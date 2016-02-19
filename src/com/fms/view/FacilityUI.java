@@ -48,10 +48,22 @@ public class FacilityUI {
         address1.setCity("Chicago");
         address1.setState("IL");
         address1.setZip("66610");
+        address1.setCapacity(50);
         facility1.setAddress(address1); 
+        
+        //address1 for facility 1
+        Address address2 = new Address();
+        address2.setFacilityID(2);
+        address2.setAddressId("B01");
+        address2.setStreet("IBM Building Tower 1");
+        address2.setCity("Chicago");
+        address2.setState("IL");
+        address2.setZip("66610");
+        address2.setCapacity(40);
+        facility1.setAddress(address2); 
 
         
-        fac1.addFacility(facility1);
+//        fac1.addFacility(facility1);
         
 //       fac1.deleteFacility(2);
 //        fac1.queryFacilities();
@@ -71,9 +83,11 @@ public class FacilityUI {
         
        // address1.setVacant(false);
         fac1.assignFacilityToUse("A01", false);
+        fac1.assignFacilityToUse("B01", true);
         
         fac1.listActualUsage();
-        fac1.calcUsageRate("A01");
+        fac1.calcUsageRate(2);
+        fac1.requestAvailableCapacity(2);
         
 /*        
         
