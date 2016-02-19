@@ -83,6 +83,23 @@ public class FacilityActivities {
 	        }
 	        return null;
 	    }
+	    
+	    public boolean assignFacilityToUse(String addressId, boolean isVacant){
+//	    	System.out.println("is assignFacilityToUse being called");
+
+	        try {
+	        	facDAO.assignFacilityToUse(addressId, isVacant);
+	            return isVacant;
+	        } catch (Exception se) {
+	            System.err.println("FacilityService: Threw a Exception assignFacilityToUse.");
+	            System.err.println(se.getMessage());
+	        }
+	        return (Boolean) null;
+	    }
+	    
+	    
+	    
+	    
 		
 	}
 

@@ -69,6 +69,9 @@ public class FacilityUI {
         Date d1 = new Date(new DateTime(2034,2,3,3,3).toDate().getTime());
         Date d2 = new Date(new DateTime(2034,4,3,3,3).toDate().getTime());
         
+       // address1.setVacant(false);
+        fac1.assignFacilityToUse("A01", false);
+        
 /*        
         
         

@@ -14,6 +14,7 @@ public class Address extends Facility{
 	private String zip;
 	private int capacity;
 	private List<Use> usages;
+	private boolean vacant;
 	
 
 	
@@ -74,6 +75,14 @@ public class Address extends Facility{
 	@Override
 	public String toString() {
 	return ("Address Information - " + "ID: " + addressId + ", Capacity: " + capacity + ", Description: "+ street );
+	}
+
+	public boolean isVacant() {
+		return vacant;
+	}
+
+	public void setVacant(boolean vacant) {
+		this.vacant = vacant;
 	}
 
 }

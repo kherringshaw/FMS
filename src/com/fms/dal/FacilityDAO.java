@@ -209,21 +209,17 @@ import com.fms.model.facility.Unit;
 			return null;
 			}
 		
-
+//method to either to vacate or to occupy
 public boolean assignFacilityToUse(String addressId, boolean isVacant){
 	
 	try {
-		System.out.println("*************** Searching for address information with ID ...  " + addressId);
+		System.out.println("*************** Updating address vacancy with ID ...  " + addressId);
 		Connection connection = DBHelper.getConnection();
-		Statement statement = connection.createStatement();
 		
-		ResultSet rs = statement.executeQuery("update Address set isVacant=:isVacant where addressId=:addressId");		
-		rs.updateString("addressId", addressId);
-		rs.updateBoolean("isVacant", isVacant);
-		
-		
-		//rs.executeUpdate();
-		
+		PreparedStatement stm = connection.prepareStatement("UPDATE address SET isVacant=? WHERE addressId=?");
+		stm.setBoolean(1, isVacant);
+		stm.setString(2, addressId);
+		stm.execute();
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -231,7 +227,7 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 	
 	 return isVacant;
 }
-
+//this method isn't needed because assignFacilityToUse takes a bool
 public boolean vacateFacility(String addressId, boolean isVacant){
 	
 	try {
