@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fms.model.maintenance.MaintenanceRequest;
 import com.fms.model.use.Use;
 
 public class Address extends Facility{
@@ -14,6 +15,7 @@ public class Address extends Facility{
 	private String zip;
 	private int capacity;
 	private List<Use> usages;
+	private List<MaintenanceRequest> inspections;
 	private boolean vacant;
 	
 
@@ -83,6 +85,14 @@ public class Address extends Facility{
 
 	public void setVacant(boolean vacant) {
 		this.vacant = vacant;
+	}
+
+	public List<MaintenanceRequest> getInspections() {
+		return inspections;
+	}
+
+	public void setInspections(List<MaintenanceRequest> inspections) {
+		this.inspections = inspections;
 	}
 
 }

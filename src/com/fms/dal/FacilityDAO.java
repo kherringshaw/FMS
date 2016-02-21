@@ -14,6 +14,7 @@ import java.util.List;
 import com.fms.model.facility.Address;
 import com.fms.model.facility.Facility;
 import com.fms.model.facility.Unit;
+import com.fms.model.maintenance.MaintenanceRequest;
 
 	public class FacilityDAO {
 		
@@ -340,7 +341,6 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 		
 		@SuppressWarnings("unchecked")
 		public int requestAvailableCapacity(int facilityId) {
-			int y=0;
 
 			try {
 				Connection connection = DBHelper.getConnection();
@@ -369,5 +369,25 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 				return (Integer) null;
 			
 		}
+		
+
+	    public List<MaintenanceRequest> getInspections(String addressId){
+	        try{
+	            Connection connection = DBHelper.getConnection();
+	            PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Inspection'");
+	            statement.setString(1,addressId);
+	            List inspections = new ArrayList();
+
+	            ResultSet set = statement.executeQuery();
+	            while (set.next()){
+	                inspections.add(set.getString(4));
+	            }
+	            return inspections;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return null;
+
+	    }
 		
 	}

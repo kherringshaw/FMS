@@ -7,6 +7,7 @@ import java.util.List;
 import com.fms.dal.FacilityDAO;
 import com.fms.model.facility.Address;
 import com.fms.model.facility.Facility;
+import com.fms.model.maintenance.MaintenanceRequest;
 
 public class FacilityActivities {
 	private FacilityDAO facDAO = new FacilityDAO();
@@ -138,6 +139,18 @@ public class FacilityActivities {
 		      System.err.println(se.getMessage());
 	    }
 		return (Integer) null;	    	
+	    }
+	    
+	    public List<MaintenanceRequest> listInspection(String addressId) {
+			
+		try {
+			return facDAO.getInspections(addressId);
+			
+	    } catch (Exception se) {
+		      System.err.println("Activity: Threw an Exception in listInspection.");
+		      System.err.println(se.getMessage());
+	    }
+		return (List<MaintenanceRequest>) null;	    	
 	    }
 	    
 	    

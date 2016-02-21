@@ -10,6 +10,9 @@ public class MaintenanceRequest {
     private Status status;
 	private Date requestDate;
 	private double cost;
+	private String addressId;
+	
+
 
     
     public int getRequestId() {
@@ -42,7 +45,7 @@ public class MaintenanceRequest {
 	}
 
     
-    public RequestType getRequestType() {
+   public RequestType getRequestType() {
         return requestType;
     }
 
@@ -65,6 +68,20 @@ public class MaintenanceRequest {
 	
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+	
+    public String toString() {
+    	return ("Maintenance Information - " + "Type: " + requestType + ", Description: " + description +  ", Request Date: "+ requestDate +  ", Status: "+ status);
+    	}
+
+
+	public String getAddressId() {
+		return addressId;
+	}
+
+
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
 	}
 
 
