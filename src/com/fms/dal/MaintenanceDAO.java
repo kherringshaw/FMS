@@ -1,9 +1,12 @@
 package com.fms.dal;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Date;
 
 import com.fms.model.facility.Address;
 import com.fms.model.facility.Facility;
@@ -50,6 +53,66 @@ public class MaintenanceDAO {
     	      System.err.println(ex.getMessage());
             }
         }
+    }
+	
+	//Returns a list of all problems (all open maintenance requests) for a facility
+    public List<MaintenanceRequest> listFacilityProblems(String addressId, boolean status){
+        try{
+            Connection connection = DBHelper.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'AND status ='open'");
+            statement.setString(1,addressId);
+            List inspections = new ArrayList();
+
+            ResultSet set = statement.executeQuery();
+            while (set.next()){
+                inspections.add(set.getString(4));
+            }
+            return inspections;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+    
+	//Returns a list of all open maintenance requests for a facility
+    public List<MaintenanceRequest> listMaintenance(String addressId, boolean status){
+        try{
+            Connection connection = DBHelper.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'AND status ='closed'");
+            statement.setString(1,addressId);
+            List inspections = new ArrayList();
+
+            ResultSet set = statement.executeQuery();
+            while (set.next()){
+                inspections.add(set.getString(4));
+            }
+            return inspections;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+    
+	//Returns a list of all open and closed maintenance requests for a facility
+    public List<MaintenanceRequest> listMaintenanceRequests(String addressId, boolean status){
+        try{
+            Connection connection = DBHelper.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'");
+            statement.setString(1,addressId);
+            List inspections = new ArrayList();
+
+            ResultSet set = statement.executeQuery();
+            while (set.next()){
+                inspections.add(set.getString(4));
+            }
+            return inspections;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 }

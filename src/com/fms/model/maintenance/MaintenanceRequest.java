@@ -50,8 +50,8 @@ public class MaintenanceRequest {
 	}
 
 	
-	public void setAppointmentDate(Date requestDate) {
-		this.requestDate = appointmentDate;
+	public void setAppointmentDate(Date appointmentDate) {
+		this.appointmentDate = appointmentDate;
 	}
     
    public RequestType getRequestType() {
