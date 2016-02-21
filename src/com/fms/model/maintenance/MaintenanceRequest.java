@@ -9,6 +9,7 @@ public class MaintenanceRequest {
     private RequestType requestType;
     private Status status;
 	private Date requestDate;
+	private Date appointmentDate;
 	private double cost;
 	private String addressId;
 	
@@ -44,6 +45,14 @@ public class MaintenanceRequest {
 		this.requestDate = requestDate;
 	}
 
+	public Date getAppointmentDate() {
+		return appointmentDate;
+	}
+
+	
+	public void setAppointmentDate(Date requestDate) {
+		this.requestDate = appointmentDate;
+	}
     
    public RequestType getRequestType() {
         return requestType;
