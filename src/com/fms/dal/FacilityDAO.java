@@ -274,6 +274,9 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 			}*/
 		
 		public static Address isInUseDuringInterval(){
+			try {
+				Connection connection = DBHelper.getConnection();
+				Statement statement = connection.createStatement();
 			return null;
 			
 		}
@@ -326,7 +329,7 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 					}
 				
 				usageRate = (y/list1.size())*100.0;
-				System.out.println("The number of units in use: " + y);
+				//System.out.println("The number of units in use: " + y);
 				System.out.println( "The usage rate for facilityID "+ facilityId + ": " + usageRate );
 				//System.out.println(list);
 				return usageRate;

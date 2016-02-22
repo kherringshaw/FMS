@@ -56,11 +56,11 @@ public class MaintenanceDAO {
     }
 	
 	//Returns a list of all problems (all open maintenance requests) for a facility
-    public List<MaintenanceRequest> listFacilityProblems(String addressId, boolean status){
+    public List<MaintenanceRequest> listFacilityProblems(String facilityId, boolean status){
         try{
             Connection connection = DBHelper.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'AND status ='open'");
-            statement.setString(1,addressId);
+            statement.setString(1,facilityId);
             List inspections = new ArrayList();
 
             ResultSet set = statement.executeQuery();
@@ -74,13 +74,31 @@ public class MaintenanceDAO {
         return null;
 
     }
+ 
+    public Boolean scheduleMaintenance(String requestId, Date d){
+    	
+    	try {
+    		System.out.println("*************** scheduling maintenance request ...  " + requestId);
+    		Connection connection = DBHelper.getConnection();
+    		
+    		PreparedStatement stm = connection.prepareStatement("UPDATE MaintenanceRequest SET Status=closed,appointmentDate=?  WHERE requestId=?");
+    		stm.setString(1, d.toString());
+    		stm.setString(2, requestId);
+    		stm.execute();
+    		return true;
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    	
+    	 return false;
+    } 
     
 	//Returns a list of all open maintenance requests for a facility
-    public List<MaintenanceRequest> listMaintenance(String addressId, boolean status){
+    public List<MaintenanceRequest> listMaintenance(String facilityId, boolean status){
         try{
             Connection connection = DBHelper.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'AND status ='closed'");
-            statement.setString(1,addressId);
+            statement.setString(1,facilityId);
             List inspections = new ArrayList();
 
             ResultSet set = statement.executeQuery();
@@ -96,11 +114,11 @@ public class MaintenanceDAO {
     }
     
 	//Returns a list of all open and closed maintenance requests for a facility
-    public List<MaintenanceRequest> listMaintenanceRequests(String addressId, boolean status){
+    public List<MaintenanceRequest> listMaintRequests(String facilityId, boolean status){
         try{
             Connection connection = DBHelper.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'");
-            statement.setString(1,addressId);
+            statement.setString(1,facilityId);
             List inspections = new ArrayList();
 
             ResultSet set = statement.executeQuery();
