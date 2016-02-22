@@ -87,14 +87,6 @@ import com.fms.model.maintenance.MaintenanceRequest;
 	            facPst.setInt(3, fac.getSize());
 	            facPst.executeUpdate();
 	            
-/*	            String addStm = "INSERT INTO Address(addressID, facilityID, street) VALUES(?, ?, ?)";
-	            addPst = con.prepareStatement(addStm);
-	            addPst.setString(1, fac.getAddress().getAddressId());
-	            addPst.setInt(2, fac.getFacilityID());
-	            addPst.setString(3, fac.getAddress().getStreet()); 
-	            addPst.executeUpdate();
-	            */
-	            
 	            
 
 	        	//Insert the facility address object
@@ -108,6 +100,7 @@ import com.fms.model.maintenance.MaintenanceRequest;
 	            addPst.setString(6, fac.getAddress().getZip());  
 	            addPst.setInt(7, fac.getAddress().getCapacity());
 	            addPst.executeUpdate();
+	            System.out.println("facility -- end of insert into address");
 	            
 	            /*
 	        	//Insert the unit object
@@ -277,6 +270,13 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 			try {
 				Connection connection = DBHelper.getConnection();
 				Statement statement = connection.createStatement();
+			return null;
+			}
+			
+			catch(SQLException e) {
+				System.err.println("Got an exception for query! ");
+				System.err.println(e.getMessage());
+			}
 			return null;
 			
 		}

@@ -66,7 +66,7 @@ public class FacilityUI {
         facility1.setAddress(address2); 
 
         
-//        fac1.addFacility(facility1);
+        fac1.addFacility(facility1);
         
 //       fac1.deleteFacility(2);
 //        fac1.queryFacilities();
@@ -78,8 +78,8 @@ public class FacilityUI {
         usage1.setStartDate(new Date(new DateTime(2015,1,1,1,1).toDate().getTime()));
         usage1.setEndDate(new Date(new DateTime(2017,1,1,1,1).toDate().getTime()));
         
-        System.out.println(usage1.getAddress());
-        System.out.println(usage1);
+//        System.out.println(usage1.getAddress());
+ //       System.out.println(usage1);
         
         Date d1 = new Date(new DateTime(2034,2,3,3,3).toDate().getTime());
         Date d2 = new Date(new DateTime(2034,4,3,3,3).toDate().getTime());
@@ -88,9 +88,9 @@ public class FacilityUI {
         fac1.assignFacilityToUse("A01", false);
         fac1.assignFacilityToUse("B01", true);
         
-        fac1.listActualUsage();
-        fac1.calcUsageRate(2);
-        fac1.requestAvailableCapacity(2);
+//        fac1.listActualUsage();
+//        fac1.calcUsageRate(2);
+ //       fac1.requestAvailableCapacity(2);
         
         mr.setRequestId(12);
         mr.setAddressId("A01");
@@ -100,7 +100,7 @@ public class FacilityUI {
         mr.setStatus(Status.open);
         
         maintAct.makeFacilityMaintRequest(mr);
-        System.out.println("what is mr: " + mr);
+ //       System.out.println("what is mr: " + mr);
         
 /*        
         
