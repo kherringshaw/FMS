@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -61,13 +62,13 @@ public class MaintenanceDAO {
             Connection connection = DBHelper.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'AND status ='open'");
             statement.setString(1,facilityId);
-            List inspections = new ArrayList();
+            List requests = new ArrayList();
 
             ResultSet set = statement.executeQuery();
             while (set.next()){
-                inspections.add(set.getString(4));
+                requests.add(set.getString(4));
             }
-            return inspections;
+            return requests;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,6 +76,7 @@ public class MaintenanceDAO {
 
     }
  
+    //Schedules maintenance for a given day and closes the maintenance request
     public Boolean scheduleMaintenance(String requestId, Date d){
     	
     	try {
@@ -99,17 +101,38 @@ public class MaintenanceDAO {
             Connection connection = DBHelper.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'AND status ='closed'");
             statement.setString(1,facilityId);
-            List inspections = new ArrayList();
+            List requests = new ArrayList();
 
             ResultSet set = statement.executeQuery();
             while (set.next()){
-                inspections.add(set.getString(4));
+                requests.add(set.getString(4));
             }
-            return inspections;
+            return requests;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+
+    }
+    
+	//Returns the expected cost for all open maintenance requests for a facility
+    public double calcMaintenanceCostForFacility(String facilityId, boolean status){
+        try{
+            Connection connection = DBHelper.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT cost FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'AND status ='closed'");
+            statement.setString(1,facilityId);
+            //List requests = new ArrayList();
+            double cost = 0;
+            ResultSet set = statement.executeQuery();
+            while (set.next()){
+                //requests.add(set.getDouble(4));
+                cost += (set.getDouble(4));
+            }
+            return cost;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
 
     }
     
@@ -119,18 +142,18 @@ public class MaintenanceDAO {
             Connection connection = DBHelper.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM MaintenanceRequest WHERE addressId=? AND requestType ='Maintenence'");
             statement.setString(1,facilityId);
-            List inspections = new ArrayList();
+            List requests = new ArrayList();
 
             ResultSet set = statement.executeQuery();
             while (set.next()){
-                inspections.add(set.getString(4));
+                requests.add(set.getString(4));
             }
-            return inspections;
+            return requests;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
 
     }
-
+    
 }
