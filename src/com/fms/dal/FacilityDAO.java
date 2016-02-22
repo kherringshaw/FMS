@@ -273,20 +273,36 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 			}
 			}*/
 		
-		public static Address isInUseDuringInterval(){
+		public static Boolean isInUseDuringInterval(String facilityID, String start){
 			try {
 				Connection connection = DBHelper.getConnection();
-				Statement statement = connection.createStatement();
-			return null;
+				PreparedStatement statement = null;
+				statement = connection.prepareStatement();
+				ResultSet rs = statement.executeQuery("SELECT facilityID FROM facility WHERE facilityID =? and startDate=?");	
+				statement.setString(1, facilityID);
+				statement.setString(2, start);
+				
+				System.out.println("Here is a list of ActualUsage");
+				System.out.println(list);
+				System.out.println("____________________________");
+				return list;
+			}
+				catch(SQLException e) {
+					System.err.println("Got an exception for query! ");
+					System.err.println(e.getMessage());
+				}
+				return false;	
 			
 		}
 
-		public Object listActualUsage() {
+		public Object listActualUsage(String facilityID) {
 			try {
 				Connection connection = DBHelper.getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery("SELECT * FROM address WHERE isVacant = 'false'");	
-				
+				//Statement statement = connection.createStatement();
+	            String s = "SELECT startDate FROM use WHERE facilityID=? AND startDate =?";
+	            PreparedStatement statement = connection.prepareStatement(s);
+				ResultSet rs = statement.executeQuery(s);	
+				statement.setString(1,facilityID);
 				List list = new ArrayList();
 				while (rs.next()){
 					list.add(rs.getString(2));
