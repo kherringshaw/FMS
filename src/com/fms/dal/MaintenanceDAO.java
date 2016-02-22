@@ -27,10 +27,10 @@ public class MaintenanceDAO {
         	System.out.println("beginning of maintenance adding");
         	
         	preparedStatement = con.prepareStatement("INSERT INTO maintenance (requestId, description, requestType, status) VALUES (?, ?, ?, ?)");
-        	preparedStatement.setInt(1, maint.getRequestId());
-        	preparedStatement.setString(2, maint.getdescription());
-        	preparedStatement.setObject(3, maint.getRequestType());
-        	preparedStatement.setObject(4, maint.getStatus());
+        	preparedStatement.setInt(1, 10);
+        	preparedStatement.setString(2, "test");
+        	preparedStatement.setObject(3, "inspection");
+        	preparedStatement.setObject(4, "open");
         	preparedStatement.executeUpdate();
         	//Insert the facility object
            /* String maintStm = "INSERT INTO maintenance(requestId, description, requestType, status, requestDate, cost, addressId) VALUES(?,?,?,?,?,?,?)";
@@ -72,6 +72,9 @@ public class MaintenanceDAO {
         }
     }
 	
+
+		
+	
 	//Returns a list of all problems (all open maintenance requests) for a facility
     public List<MaintenanceRequest> listFacilityProblems(String facilityId, boolean status){
         try{
@@ -95,7 +98,7 @@ public class MaintenanceDAO {
     }
  
     //Schedules maintenance for a given day and closes the maintenance request
-    public Boolean scheduleMaintenance(String requestId, Date d){
+    public boolean scheduleMaintenance(String requestId, Date d){
     	
     	try {
     		System.out.println("*************** scheduling maintenance request ...  " + requestId);

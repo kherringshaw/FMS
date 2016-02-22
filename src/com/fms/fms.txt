@@ -1,4 +1,5 @@
 
+create database fms;
 
 create table facility (
 	facilityID		int	not null,
