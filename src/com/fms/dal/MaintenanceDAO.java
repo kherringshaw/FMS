@@ -76,7 +76,9 @@ public class MaintenanceDAO {
     public List<MaintenanceRequest> listFacilityProblems(String facilityId, boolean status){
         try{
             Connection connection = DBHelper.getConnection();
+
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM maintenance WHERE addressId=? AND requestType ='Maintenence'AND status ='open'");
+
             statement.setString(1,facilityId);
             List requests = new ArrayList();
 
@@ -115,7 +117,9 @@ public class MaintenanceDAO {
     public List<MaintenanceRequest> listMaintenance(String facilityId, boolean status){
         try{
             Connection connection = DBHelper.getConnection();
+
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM maintenance WHERE addressId=? AND requestType ='Maintenence'AND status ='closed'");
+
             statement.setString(1,facilityId);
             List requests = new ArrayList();
 
@@ -131,11 +135,13 @@ public class MaintenanceDAO {
 
     }
     
-	//Returns the expected cost for all open maintenance requests for a facility
+	//Returns the expected cost for all open and closed maintenance requests for a facility
     public double calcMaintenanceCostForFacility(String facilityId, boolean status){
         try{
             Connection connection = DBHelper.getConnection();
+
             PreparedStatement statement = connection.prepareStatement("SELECT cost FROM maintenance WHERE addressId=? AND requestType ='Maintenence'AND status ='closed'");
+
             statement.setString(1,facilityId);
             //List requests = new ArrayList();
             double cost = 0;
@@ -152,11 +158,42 @@ public class MaintenanceDAO {
 
     }
     
+	//Returns the problem rate per use of a facility
+    public double calcProblemRateForFacility(String facilityId){
+        Connection connection = DBHelper.getConnection();
+        PreparedStatement m = null;
+        PreparedStatement u = null;
+        try{;
+            String mStatement = "SELECT requestID FROM MaintenanceRequest WHERE facilityId=? AND requestType ='Maintenence'";
+            String uStatement = "SELECT usageID FROM Use WHERE facilityId=?";
+            m=connection.prepareStatement(mStatement);
+            u=connection.prepareStatement(uStatement);
+            m.setString(1,facilityId);
+            u.setString(1,facilityId);
+            double requests = 0;
+            double uses = 0;
+            ResultSet mset = m.executeQuery();
+            ResultSet uset = u.executeQuery();
+            while (mset.next()){
+            	requests++;
+            }
+            while (uset.next()){
+            	uses++;
+            }
+            return requests/uses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+
+    }
+    
 	//Returns a list of all open and closed maintenance requests for a facility
     public List<MaintenanceRequest> listMaintRequests(String facilityId, boolean status){
         try{
             Connection connection = DBHelper.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Description FROM maintenance WHERE addressId=? AND requestType ='Maintenence'");
+
             statement.setString(1,facilityId);
             List requests = new ArrayList();
 

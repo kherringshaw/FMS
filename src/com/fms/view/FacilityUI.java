@@ -88,7 +88,7 @@ public class FacilityUI {
         fac1.assignFacilityToUse("A01", false);
         fac1.assignFacilityToUse("B01", true);
         
-//        fac1.listActualUsage();
+//        fac1.listActualUsage(1);
 //        fac1.calcUsageRate(2);
  //       fac1.requestAvailableCapacity(2);
         

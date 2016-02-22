@@ -101,11 +101,11 @@ public class FacilityActivities {
 	        return (Boolean) null;
 	    }
 	    
-	    public Object listActualUsage() {
+	    public Object listActualUsage(int facilityID) {
 			
 		try {
 
-			return facDAO.listActualUsage();
+			return facDAO.listActualUsage(facilityID);
 
 			
 	    } catch (Exception se) {
