@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.*;
 
 
 import com.fms.model.facility.Address;
@@ -266,7 +267,7 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 			}
 			}*/
 		
-		public static Boolean isInUseDuringInterval(String facilityID, String start){
+		public static boolean isInUseDuringInterval(String facilityID, String start){
 			try {
 				Connection connection = DBHelper.getConnection();
 				String s = "SELECT facilityID FROM facility WHERE facilityID =? and startDate=?";
@@ -399,5 +400,24 @@ public boolean assignFacilityToUse(String addressId, boolean isVacant){
 	        return null;
 
 	    }
+	    
+		 public int calcDownTimeForFacility(String facilityID, Date start, Date end){
+			   //org.joda.Days d = Days.daysBetween(startDate, endDate);
+			   //int days = d.getDays();
+			 Calendar startCalendar = new GregorianCalendar();
+			 startCalendar.setTime(start);
+			 Calendar endCalendar = new GregorianCalendar();
+			 endCalendar.setTime(end);
+
+			 int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+			 int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+		    try{
+		    	foreach()	
+		    } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return -1;
+			
+		}
 		
 	}

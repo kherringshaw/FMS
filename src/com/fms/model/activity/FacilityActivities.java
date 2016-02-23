@@ -8,6 +8,8 @@ import com.fms.dal.FacilityDAO;
 import com.fms.model.facility.Address;
 import com.fms.model.facility.Facility;
 import com.fms.model.maintenance.MaintenanceRequest;
+import org.joda.*;
+import java.sql.Date;
 
 public class FacilityActivities {
 	private FacilityDAO facDAO = new FacilityDAO();
@@ -113,6 +115,21 @@ public class FacilityActivities {
 		      System.err.println(se.getMessage());
 	    }
 		return null;
+	    	
+	    }
+	    
+	    public boolean isInUseDuringInterval(int facilityID, Date start) {
+			
+		try {
+
+			return facDAO.isInUseDuringInterval(facilityID, start);
+
+			
+	    } catch (Exception se) {
+		      System.err.println("Activity: Threw an Exception in listActualUsage.");
+		      System.err.println(se.getMessage());
+	    }
+		return (Boolean) null;
 	    	
 	    }
 	    
